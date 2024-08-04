@@ -1,0 +1,6 @@
+{
+  "name": "phon",
+  "age": 40,
+  "movies_lover": true,
+  "fav_movies": ["superman", "batman", "the boys"]
+}

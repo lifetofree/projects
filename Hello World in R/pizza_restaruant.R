@@ -1,0 +1,85 @@
+## welcome to pizza restaurant
+## init data
+sum_amount <- 0
+pizza_list <- data.frame(
+  id = 1:5,
+  item_name = c("Margherita", "Pepperoni", "Vegetarian", "Hawaiian", "Supreme"),
+  price = c(12.99, 14.99, 11.99, 13.99, 15.99)
+)
+drink_list <- data.frame(
+  id = 1:5,
+  item_name = c("Coca-Cola", "Pepsi", "Water", "Orange Juice", "Coffee"),
+  price = c(2.0, 2.0, 1.5, 3.0, 2.5)
+)
+order_list <- data.frame()
+## end init data
+
+welcome_res <- function() {
+  print("Welcome to lifetofree pizza")  
+  order_status <- readline("Do you want start your order? [y/n] : ")
+  order_status <- tolower(order_status)
+  if (order_status == "y") {
+    order_res()
+  } else if (order_status == "n") {
+    thankyou_res()
+  } else {
+    print("Sorry, wrong selection please select again")
+    welcome_res()
+  }
+}
+
+order_res <- function() {
+  print("Your order")
+  print(order_list)
+  order_type <- readline("Please select yor type of items(pizza or drink or pay bill) [p/d/b] : ")
+  order_type <- tolower(order_type)
+  if (order_type == "p") {
+    pizza_select()
+  } else if (order_type == "d") {
+    drink_select()
+  } else if (order_type == "b") {
+    billing_res()
+  } else {
+    print("Sorry, wrong selection please select again")
+    order_res()
+  }
+}
+
+pizza_select <- function() {
+  print(pizza_list)
+  pizza_selected <- readline("Please select the item number of pizza that you want : ")
+  order_selected(pizza_selected, "p")
+}
+
+drink_select <- function() {
+  print(drink_list)
+  drink_selected <- readline("Please select the item number of drink that you want : ")
+  order_selected(drink_selected, "d")
+}
+
+order_selected <- function(item_selected, type_selected) {
+  if (type_selected == "p") {
+    selected_row <- pizza_list[as.numeric(item_selected), ]
+    # Check for NA in the selected data
+    ifelse (any(is.na(selected_row)), order_res(), order_list <<- rbind(order_list, selected_row))
+  } else if (type_selected == "d") {
+    selected_row <- drink_list[as.numeric(item_selected), ]
+    # Check for NA in the selected data
+    ifelse (any(is.na(selected_row)), order_res(), order_list <<- rbind(order_list, selected_row))
+  }
+  
+  order_res()
+  ##return(order_list)
+}
+
+billing_res <- function() {
+  print("summary you order")
+  print(order_list)
+  print(paste0("Summary : ", "", sum(order_list$price)))
+  order_list <- order_list[FALSE, ] ## clear order list
+  thankyou_res()
+}
+
+thankyou_res <- function() {
+  return("Thankyou")
+}
