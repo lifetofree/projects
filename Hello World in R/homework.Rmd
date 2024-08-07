@@ -1,0 +1,42 @@
+---
+title: "Homework Data Viz Batch 10"
+author: "Phon Chantararat"
+date: "2024-08-06"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Hello World
+
+```{r}
+library(tidyverse)
+print("Loaded library for. data visualization")
+```
+
+## Prepare Data
+```{r}
+set.seed(42)
+small_df <- diamonds |>
+  filter(carat < 2) |>
+  sample_n(1000)
+
+small_df |>
+  count(price < 1000)
+```
+
+## My First Chart
+```{r}
+ggplot(small_df, aes(price)) +
+  geom_histogram()
+```
+
+### Aewsome
+
+This is my first markdown
+
+My favorite food
+
+- Hamburger
+- French Fried
+- Hot dog
