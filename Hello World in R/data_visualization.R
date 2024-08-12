@@ -53,7 +53,7 @@ spending <- factor(spending,
 
 ## factor => 1. norminal data 2. ordinal data
 
-## one varisble - continuous
+## one variable - continuous
 ggplot(mtcars, aes(mpg)) +
   geom_histogram(bins = 5) ## 30 as default
 

@@ -1,0 +1,67 @@
+---
+title: "Homework Data Viz Batch 10"
+author: "Phon Chantararat"
+date: "2024-08-08"
+output: html_document
+---
+
+### Loaded library for data visualization
+
+```{r}
+library(tidyverse)
+```
+
+### View top 10 of data
+```{r}
+head(diamonds, 10)
+```
+
+
+### Prepare Data (Sample 10% of data)
+
+```{r}
+set.seed(42)
+small_df <- diamonds |>
+  sample_frac(0.1)
+print(small_df)
+```
+
+### 1. Bar chart diamond cut
+```{r}
+ggplot(small_df, aes(cut)) +
+  geom_bar(fill = "#fad7a0") + 
+  theme_minimal()
+```
+
+### 2. Point chart diamond carat and price
+```{r}
+ggplot(small_df, 
+       aes(carat, price)) +
+  geom_point(alpha = 0.3, color = "#85c1e9") + 
+  theme_minimal()
+```
+
+### 3. Box plot diamond clarity and depth
+```{r}
+ggplot(small_df,
+       aes(clarity, depth)) +
+  geom_boxplot(color = "#229954", fill = "#DAF7A6") + 
+  theme_minimal()
+```
+
+### 4. Point chart diamond price and carat by color
+```{r}
+ggplot(small_df,
+       aes(carat, price, col = color)) +
+  geom_point(size = 3, alpha = 0.2) + 
+  theme_minimal()
+```
+
+### 5. Point chart diamond price and carat by color and cut
+```{r}
+ggplot(small_df,
+       aes(carat, price, col = color)) +
+  geom_point(size = 3, alpha = 0.2) + 
+  facet_wrap(~cut) +
+  theme_minimal()
+```
